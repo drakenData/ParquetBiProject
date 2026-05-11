@@ -1,4 +1,3 @@
-# monitor_parquet.py
 import os, time
 import pyarrow.parquet as pq
 from datetime import datetime, timedelta
