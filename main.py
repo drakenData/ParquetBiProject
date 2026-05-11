@@ -1,4 +1,3 @@
-# exportar_vendas.py
 import sys, os, subprocess, re, time, threading
 from datetime import datetime, timedelta
 
