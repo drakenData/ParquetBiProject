@@ -22,23 +22,6 @@ TOTAL_EST      = 44_355_940
 
 # ── Schema fixo ───────────────────────────────────────────────
 SCHEMA_FIXO = {
-    "codigo_cliente":  pl.Utf8,
-    "vendedor":        pl.Utf8,
-    "codigo_produto":  pl.Utf8,
-    "valor_bruto":     pl.Float64,
-    "valor_liquido":   pl.Float64,
-    "unidade_vendida": pl.Float64,
-    "data_emissao":    pl.Utf8,
-    "nota_fiscal":     pl.Utf8,
-    "tipo_nota":       pl.Utf8,
-    "unidade":         pl.Utf8,
-    "cod_canal":       pl.Utf8,
-    "desc_finan":      pl.Float64,
-    "apontador":       pl.Utf8,
-    "empresa_cliente": pl.Utf8,
-    "data_pedido":     pl.Utf8,
-    "prazo_ponderado": pl.Float64,
-    "pedido_venda":    pl.Utf8,
 }
 
 # ── Logger ────────────────────────────────────────────────────
@@ -96,27 +79,10 @@ def exportar_chunk(d_ini, d_fim):
     query = f"""
     EVALUATE
     CALCULATETABLE(
-        SELECTCOLUMNS(f_vendas,
-            "codigo_cliente",  f_vendas[codigo_cliente],
-            "vendedor",        f_vendas[vendedor],
-            "codigo_produto",  f_vendas[codigo_produto],
-            "valor_bruto",     f_vendas[valor_bruto],
-            "valor_liquido",   f_vendas[valor_liquido],
-            "unidade_vendida", f_vendas[unidade_vendida],
-            "data_emissao",    f_vendas[data_emissao],
-            "nota_fiscal",     f_vendas[nota_fiscal],
-            "tipo_nota",       f_vendas[tipo_nota],
-            "unidade",         f_vendas[unidade],
-            "cod_canal",       f_vendas[cod_canal],
-            "desc_finan",      f_vendas[desc_finan],
-            "apontador",       f_vendas[apontador],
-            "empresa_cliente", f_vendas[empresa_cliente],
-            "data_pedido",     f_vendas[data_pedido],
-            "prazo_ponderado", f_vendas[prazo_ponderado],
-            "pedido_venda",    f_vendas[pedido_venda]
+        SELECTCOLUMNS(
         ),
-        f_vendas[data_emissao] >= DATE({d_ini.year},{d_ini.month},{d_ini.day}),
-        f_vendas[data_emissao] <  DATE({d_fim.year},{d_fim.month},{d_fim.day})
+        f_vendas[] >= DATE({d_ini.year},{d_ini.month},{d_ini.day}),
+        f_vendas[] <  DATE({d_fim.year},{d_fim.month},{d_fim.day})
     )"""
 
     t0    = time.time()
