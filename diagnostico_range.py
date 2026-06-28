@@ -23,9 +23,9 @@ conn.open()
 cur = conn.cursor().execute("""
 EVALUATE
 ROW(
-    "data_min", MINX(f_vendas , f_vendas [data_emissao]),
-    "data_max", MAXX(f_vendas , f_vendas [data_emissao]),
-    "total_linhas", COUNTROWS(f_vendas)
+    "data_min", MINX(),
+    "data_max", MAXX(),
+    "total_linhas", COUNTROWS()
 )
 """)
 row = cur.fetchall()[0]
